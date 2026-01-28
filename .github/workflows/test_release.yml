@@ -246,8 +246,6 @@ jobs:
       - get_manager
     if: always()
     env:
-      REPO_OWNER: ShirkNeko
-      REPO_NAME: GKI_KernelSU_SUSFS
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       RELEASE_NAME: "GKI Kernel: ${{ inputs.kernelsu_variant == 'Next' && 'KernelSU-' || '' }} ${{ inputs.kernelsu_variant }}"
       INITIAL_RELEASE_NOTES: |
@@ -303,7 +301,7 @@ jobs:
           BASE_VERSION="v2.0.0"
           
           # Fetch all existing tags using git ls-remote
-          EXISTING_TAGS=$(git ls-remote --tags https://github.com/$REPO_OWNER/$REPO_NAME.git | awk '{print $2}' | sed 's/refs\/tags\///' || true)
+          EXISTING_TAGS=$(git ls-remote --tags https://github.com/${{ github.repository }}.git | awk '{print $2}' | sed 's/refs\/tags\///' || true)
 
           # Find highest revision number for this base version
           MAX_REVISION=0
